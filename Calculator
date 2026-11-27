@@ -1,0 +1,53 @@
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int main() {
+    int subtotal, current_total = 0;
+    bool is_vip = true;
+    bool is_regular = true;
+
+    printf("\nEnter your subtotal: ");
+    scanf("%d", &subtotal);
+
+    // Membership Eligibility
+    if (is_vip || is_regular) {
+        if (is_vip) {
+            current_total = subtotal - (15 * subtotal / 100);
+        }
+        else if (is_regular) {
+            current_total = subtotal - (5 * subtotal / 100);
+        }
+    }
+    else {
+        current_total = subtotal;
+        printf("\nYou are a non-regular customer. No membership discount.");
+    }
+
+    // Coupon Eligibility
+    if (current_total >= 100) {
+        printf("\nYou won a coupon!");
+        current_total = current_total - 20;
+    }
+    else {
+        printf("\nCoupon is not applied.");
+    }
+
+    // Shipping Charges
+    if (current_total >= 150) {
+        printf("\nYou will get free shipping!");
+    }
+    else if (current_total > 50) {
+        printf("\nShipping charge is 10 Rs.");
+        current_total = current_total + 10;
+    }
+    else {
+        printf("\nShipping charge is 15 Rs.");
+        current_total = current_total + 15;
+    }
+
+    // Total Bill Amount
+    printf("\nYour total bill is %d Rs.\n", current_total);
+
+    return 0;
+}
